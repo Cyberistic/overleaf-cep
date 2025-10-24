@@ -3,7 +3,7 @@ version: '3.9'
 services:
   overleaf:
     build:
-      context: ./server-ce
+      context: .
       dockerfile: Dockerfile
     image: overleaf-cep:latest
     container_name: overleaf
