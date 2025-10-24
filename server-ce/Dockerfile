@@ -18,7 +18,7 @@ ADD tools/migrations/ /overleaf/tools/migrations/
 
 # Add npm patches
 # -----------------------
-ADD patches/ /overleaf/patches
+ADD ../patches/ /overleaf/patches
 
 # Install npm dependencies and build webpack assets
 # ------------------------
