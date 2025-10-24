@@ -22,7 +22,7 @@ services:
       - SERVICE_FQDN_OVERLEAF
       # Use the auto-generated FQDN as site URL
       - OVERLEAF_SITE_URL=${SERVICE_FQDN_OVERLEAF}
-      # MongoDB connection (Coolify password)
+      # MongoDB connection (local, no auth needed)
       - OVERLEAF_MONGO_URL=mongodb://mongo/sharelatex
       # Redis connection
       - OVERLEAF_REDIS_HOST=redis
@@ -46,10 +46,13 @@ services:
       "
     volumes:
       - mongo_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=backup
+      - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=${SERVICE_PASSWORD_MONGO}
       - MONGO_INITDB_DATABASE=sharelatex
+      # Coolify will generate a password for the backup user
+      - SERVICE_PASSWORD_BACKUP=${SERVICE_PASSWORD_BACKUP}
     healthcheck:
       test: ["CMD", "mongosh", "localhost:27017/test", "--eval", "db.stats().ok"]
       interval: 10s
