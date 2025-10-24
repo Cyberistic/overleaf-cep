@@ -85,7 +85,7 @@ RUN chmod +x /overleaf/bin/force-history-resyncs
 
 # Copy Latexmkrc
 # -----------------------
-COPY server-ce/config/latexmkrc /usr/local/share/latexmk/LatexMk
+COPY config/latexmkrc /usr/local/share/latexmk/LatexMk
 
 # --- Custom persistent TeX Live setup ---
 # Ensure texlive is installed and binaries available globally
