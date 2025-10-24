@@ -87,6 +87,14 @@ RUN chmod +x /overleaf/bin/force-history-resyncs
 # -----------------------
 COPY server-ce/config/latexmkrc /usr/local/share/latexmk/LatexMk
 
+# --- Custom persistent TeX Live setup ---
+# Ensure texlive is installed and binaries available globally
+RUN tlmgr install scheme-full && \
+    tlmgr path add
+
+# Make sure PATH includes TeX binaries permanently
+ENV PATH="/usr/local/texlive/bin/x86_64-linux:$PATH"
+
 # File that controls open|closed status of the site
 # -------------------------------------------------
 ENV SITE_MAINTENANCE_FILE="/etc/overleaf/site_status"
